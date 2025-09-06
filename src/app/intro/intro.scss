@@ -1,0 +1,290 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@400;700;900&display=swap');
+
+// Cores
+$neon-blue: #00bfff;
+$neon-white: #ffffff;
+$dark-bg: #000000;
+$accent-blue: #0080cc;
+
+.intro-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: $dark-bg;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  z-index: 9999;
+  transition: opacity 0.4s ease, visibility 0.4s ease;
+
+  &.fade-out {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
+
+/* Background animado */
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.wave {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.3;
+  animation: wave-animation 4s ease-in-out infinite;
+
+  &.wave1 {
+    width: 300px;
+    height: 300px;
+    top: 20%;
+    left: 10%;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.2) 0%, transparent 70%);
+    animation-delay: 0s;
+  }
+
+  &.wave2 {
+    width: 200px;
+    height: 200px;
+    top: 60%;
+    right: 15%;
+    background: radial-gradient(circle, rgba(0, 128, 204, 0.15) 0%, transparent 70%);
+    animation-delay: 1s;
+  }
+
+  &.wave3 {
+    width: 400px;
+    height: 400px;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+    animation-delay: 2s;
+  }
+}
+
+@keyframes wave-animation {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2) rotate(180deg);
+    opacity: 0.1;
+  }
+}
+
+/* Conteúdo principal */
+.content {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3rem;
+}
+
+/* Logo circular */
+.logo-circle {
+  width: 250px;
+  height: 250px;
+  border: 3px solid transparent;
+  border-radius: 50%;
+  background: linear-gradient($dark-bg, $dark-bg) padding-box,
+              linear-gradient(45deg, $neon-blue, $accent-blue, $neon-blue) border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transform: scale(0.5) rotate(-180deg);
+  transition: all 1s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  position: relative;
+
+  &.show {
+    opacity: 1;
+    transform: scale(1) rotate(0deg);
+    animation: logoGlow 3s ease-in-out infinite alternate;
+  }
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: -5px;
+    right: -5px;
+    bottom: -5px;
+    border-radius: 50%;
+    background: linear-gradient(45deg, $neon-blue, transparent, $neon-blue);
+    opacity: 0.5;
+    animation: rotate360 4s linear infinite;
+    z-index: -1;
+  }
+
+  @media (max-width: 480px) {
+    width: 200px;
+    height: 200px;
+  }
+}
+
+.inner-circle {
+  width: 200px;
+  height: 200px;
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+
+  @media (max-width: 480px) {
+    width: 160px;
+    height: 160px;
+  }
+}
+
+.logo-text {
+  text-align: center;
+}
+
+.studio {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+  font-weight: 900;
+  color: $neon-blue;
+  margin: 0;
+  letter-spacing: 0.3rem;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease 0.2s;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.brand {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  color: $neon-white;
+  margin: -0.5rem 0 0 0;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s ease 0.6s;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Barra de progresso */
+.progress-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease 1s;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.progress-bar {
+  width: 300px;
+  height: 4px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  position: relative;
+
+  @media (max-width: 480px) {
+    width: 250px;
+  }
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, $neon-blue, $accent-blue, $neon-blue);
+  border-radius: 2px;
+  width: 0%;
+  animation: progressFill 3s ease-in-out forwards;
+  box-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.loading-text {
+  font-family: 'Orbitron', monospace;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.7);
+  margin: 0;
+  letter-spacing: 0.1rem;
+  animation: textPulse 2s ease-in-out infinite alternate;
+}
+
+/* Animações */
+@keyframes logoGlow {
+  from {
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.6);
+  }
+}
+
+@keyframes rotate360 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes progressFill {
+  0% { width: 0%; }
+  30% { width: 50%; }
+  70% { width: 80%; }
+  100% { width: 100%; }
+}
+
+@keyframes textPulse {
+  from { opacity: 0.7; }
+  to { opacity: 1; }
+}
+
+/* Responsividade */
+@media (max-width: 480px) {
+  .content {
+    gap: 2rem;
+  }
+
+  .studio {
+    letter-spacing: 0.2rem;
+  }
+}
+
+@media (orientation: landscape) and (max-height: 600px) {
+  .logo-circle {
+    width: 180px;
+    height: 180px;
+  }
+
+  .inner-circle {
+    width: 140px;
+    height: 140px;
+  }
+
+  .content {
+    gap: 1.5rem;
+  }
+}

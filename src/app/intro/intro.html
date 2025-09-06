@@ -1,0 +1,29 @@
+<div class="intro-container" [class.fade-out]="fadeOut">
+  <!-- Background animado -->
+  <div class="animated-bg">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+  </div>
+
+  <!-- Conteúdo principal -->
+  <div class="content">
+    <!-- Logo central -->
+    <div class="logo-circle" [class.show]="showStudio">
+      <div class="inner-circle">
+        <div class="logo-text">
+          <h1 class="studio" [class.show]="showStudio">STUDIO</h1>
+          <h2 class="brand" [class.show]="showKcortts">Kcortts</h2>
+        </div>
+      </div>
+    </div>
+
+    <!-- Loading bar -->
+    <div class="progress-container" [class.show]="showStudio">
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <p class="loading-text">Preparando sua experiência...</p>
+    </div>
+  </div>
+</div>

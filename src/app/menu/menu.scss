@@ -1,0 +1,443 @@
+@import url('https://fonts.googleapis.com/css2?family=Great+Vibes&family=Orbitron:wght@400;700;900&display=swap');
+
+// Cores idênticas à intro
+$neon-blue: #00bfff;
+$neon-white: #ffffff;
+$dark-bg: #000000;
+$accent-blue: #0080cc;
+
+/* Container principal - Estático e sem overflow - Aparece instantaneamente */
+.menu-container {
+  height: 100vh;
+  width: 100vw;
+  max-height: 100vh;
+  max-width: 100vw;
+  background: $dark-bg;
+  padding: clamp(10px, 3vw, 20px);
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  overscroll-behavior: none;
+  touch-action: none;
+  user-select: none;
+  opacity: 1;
+  animation: menuFadeIn 0.5s ease-out;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background:
+      radial-gradient(circle at 30% 70%, rgba(0, 191, 255, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 70% 30%, rgba(0, 128, 204, 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 1;
+  }
+}/* Background com waves - Estático */
+.animated-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.wave {
+  position: absolute;
+  border-radius: 50%;
+  opacity: 0.2;
+  animation: wave-animation 6s ease-in-out infinite;
+  pointer-events: none;
+
+  &.wave1 {
+    width: clamp(150px, 30vw, 200px);
+    height: clamp(150px, 30vw, 200px);
+    top: 15%;
+    left: 10%;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.1) 0%, transparent 70%);
+    animation-delay: 0s;
+  }
+
+  &.wave2 {
+    width: clamp(100px, 25vw, 150px);
+    height: clamp(100px, 25vw, 150px);
+    top: 70%;
+    right: 15%;
+    background: radial-gradient(circle, rgba(0, 128, 204, 0.08) 0%, transparent 70%);
+    animation-delay: 2s;
+  }
+
+  &.wave3 {
+    width: clamp(200px, 40vw, 300px);
+    height: clamp(200px, 40vw, 300px);
+    bottom: 20%;
+    left: 60%;
+    background: radial-gradient(circle, rgba(0, 191, 255, 0.06) 0%, transparent 70%);
+    animation-delay: 4s;
+  }
+}
+
+@keyframes wave-animation {
+  0%, 100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 0.2;
+  }
+  50% {
+    transform: scale(1.3) rotate(180deg);
+    opacity: 0.05;
+  }
+}
+
+/* Header do menu - Responsivo - Aparece rapidamente */
+.menu-header {
+  text-align: center;
+  margin: clamp(1rem, 4vh, 2rem) auto clamp(1.5rem, 5vh, 3rem);
+  position: relative;
+  z-index: 4;
+  animation: fadeInDown 0.6s ease-out;
+  flex-shrink: 0;
+  opacity: 1;
+}
+
+/* Logo circular - Totalmente responsiva */
+.logo-circle {
+  width: clamp(120px, 25vmin, 200px);
+  height: clamp(120px, 25vmin, 200px);
+  border: clamp(2px, 0.5vmin, 3px) solid transparent;
+  border-radius: 50%;
+  background: linear-gradient($dark-bg, $dark-bg) padding-box,
+              linear-gradient(45deg, $neon-blue, $accent-blue, $neon-blue) border-box;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  animation: logoGlow 3s ease-in-out infinite alternate;
+  margin: 0 auto clamp(0.8rem, 3vh, 1.5rem);
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: clamp(-3px, -0.8vmin, -5px);
+    left: clamp(-3px, -0.8vmin, -5px);
+    right: clamp(-3px, -0.8vmin, -5px);
+    bottom: clamp(-3px, -0.8vmin, -5px);
+    border-radius: 50%;
+    background: linear-gradient(45deg, $neon-blue, transparent, $neon-blue);
+    opacity: 0.3;
+    animation: rotate360 4s linear infinite;
+    z-index: -1;
+  }
+}
+
+.inner-circle {
+  width: clamp(90px, 18vmin, 150px);
+  height: clamp(90px, 18vmin, 150px);
+  background: rgba(0, 0, 0, 0.8);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(0, 191, 255, 0.3);
+}
+
+.logo-text {
+  text-align: center;
+}
+
+.brand-name {
+  font-family: 'Orbitron', monospace;
+  font-size: clamp(0.9rem, 3.5vmin, 1.6rem);
+  font-weight: 900;
+  color: $neon-blue;
+  margin: 0 0 clamp(-0.1rem, -0.5vmin, -0.2rem) 0;
+  letter-spacing: clamp(0.1rem, 0.5vmin, 0.2rem);
+  text-shadow: 0 0 10px rgba(0, 191, 255, 0.5);
+}
+
+.subtitle {
+  font-family: 'Great Vibes', cursive;
+  font-size: clamp(0.8rem, 2.5vmin, 1.3rem);
+  color: $neon-white;
+  margin: 0;
+  opacity: 0.9;
+}
+
+/* Container dos links - Responsivo com scroll interno se necessário */
+.links-container {
+  max-width: min(420px, 90vw);
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.8rem, 2.5vh, 1.2rem);
+  position: relative;
+  z-index: 4;
+  padding: 0 clamp(5px, 2vw, 10px);
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  max-height: 60vh;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+/* Estilo dos links - Totalmente responsivos */
+.link-item {
+  position: relative;
+  background: linear-gradient(135deg, rgba(0, 0, 0, 0.8) 0%, rgba(10, 10, 10, 0.9) 100%);
+  border: clamp(1px, 0.3vw, 2px) solid transparent;
+  border-radius: clamp(8px, 2vw, 12px);
+  padding: clamp(0.8rem, 3vh, 1.2rem) clamp(1rem, 3.5vw, 1.5rem);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: clamp(0.6rem, 2vw, 1rem);
+  transition: all 0.3s ease;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 clamp(2px, 1vh, 4px) clamp(10px, 4vw, 20px) rgba(0, 0, 0, 0.4),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+  user-select: none;
+  touch-action: manipulation;
+
+  opacity: 0;
+  transform: translateY(20px);
+  animation: slideInUp 0.5s ease-out forwards;
+
+  &:nth-child(1) { animation-delay: 0.1s; }
+  &:nth-child(2) { animation-delay: 0.15s; }
+  &:nth-child(3) { animation-delay: 0.2s; }
+  &:nth-child(4) { animation-delay: 0.25s; }
+  &:nth-child(5) { animation-delay: 0.3s; }
+  &:nth-child(6) { animation-delay: 0.35s; }
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: clamp(8px, 2vw, 12px);
+    padding: clamp(1px, 0.3vw, 2px);
+    background: linear-gradient(45deg, $neon-blue, $accent-blue, $neon-blue);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: xor;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+  }
+
+  &:hover {
+    transform: translateY(clamp(-1px, -0.5vh, -3px));
+    box-shadow:
+      0 clamp(4px, 2vh, 8px) clamp(15px, 6vw, 30px) rgba(0, 191, 255, 0.15),
+      0 clamp(2px, 1vh, 4px) clamp(10px, 4vw, 20px) rgba(0, 0, 0, 0.5),
+      inset 0 1px 0 rgba(255, 255, 255, 0.1);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .link-icon svg {
+      color: $neon-blue;
+      transform: scale(1.1);
+    }
+
+    .link-arrow {
+      color: $neon-blue;
+      transform: translateX(clamp(2px, 1vw, 5px));
+    }
+  }
+
+  &:active {
+    transform: translateY(clamp(-0.5px, -0.2vh, -1px));
+  }
+
+  /* Responsividade específica para telas pequenas */
+  @media (max-width: 480px) {
+    padding: clamp(0.6rem, 2.5vh, 0.9rem) clamp(0.8rem, 3vw, 1.2rem);
+    gap: clamp(0.4rem, 1.5vw, 0.8rem);
+  }
+}
+
+.link-icon {
+  width: clamp(30px, 8vw, 40px);
+  height: clamp(30px, 8vw, 40px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: clamp(6px, 1.5vw, 8px);
+  background: linear-gradient(135deg, rgba(0, 191, 255, 0.1), rgba(0, 128, 204, 0.1));
+  flex-shrink: 0;
+
+  svg {
+    width: clamp(18px, 5vw, 24px);
+    height: clamp(18px, 5vw, 24px);
+    color: $neon-white;
+    transition: all 0.3s ease;
+  }
+}
+
+.link-content {
+  flex: 1;
+
+  h3 {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(0.9rem, 3vw, 1.1rem);
+    font-weight: 700;
+    color: $neon-white;
+    margin: 0 0 clamp(0.1rem, 0.5vh, 0.2rem) 0;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    line-height: 1.2;
+  }
+
+  p {
+    font-family: 'Orbitron', sans-serif;
+    font-size: clamp(0.7rem, 2.2vw, 0.85rem);
+    color: rgba($neon-white, 0.7);
+    margin: 0;
+    letter-spacing: clamp(0.02rem, 0.1vw, 0.05rem);
+    line-height: 1.3;
+  }
+}
+
+.link-arrow {
+  font-size: clamp(1.2rem, 3.5vw, 1.5rem);
+  color: rgba($neon-white, 0.6);
+  transition: all 0.3s ease;
+  flex-shrink: 0;
+}
+
+/* Footer decorativo */
+.menu-footer {
+  text-align: center;
+  margin-top: 3rem;
+  position: relative;
+  z-index: 4;
+  animation: fadeInUp 0.8s ease-out 0.7s both;
+}
+
+.vintage-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+
+  .divider-line {
+    width: 60px;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, $neon-blue, transparent);
+    box-shadow: 0 0 8px rgba(0, 191, 255, 0.5);
+  }
+
+  .divider-ornament {
+    color: $neon-blue;
+    font-size: 1.2rem;
+    text-shadow: 0 0 15px rgba(0, 191, 255, 0.8);
+    animation: ornamentFloat 3s ease-in-out infinite;
+  }
+}
+
+.footer-text {
+  font-family: 'Orbitron', sans-serif;
+  color: $neon-white;
+  font-size: 0.9rem;
+  margin: 0;
+  opacity: 0.7;
+  letter-spacing: 0.05rem;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+}
+
+/* Animações idênticas à intro */
+@keyframes logoGlow {
+  from {
+    box-shadow: 0 0 20px rgba(0, 191, 255, 0.3);
+  }
+  to {
+    box-shadow: 0 0 40px rgba(0, 191, 255, 0.6);
+  }
+}
+
+@keyframes rotate360 {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes ornamentFloat {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-3px);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Animações */
+@keyframes menuFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
